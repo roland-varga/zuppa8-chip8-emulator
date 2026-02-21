@@ -21,3 +21,23 @@ void map_keys(CPU *c) {
     c->keys[0xB] = IsKeyDown(KEY_C);
     c->keys[0xF] = IsKeyDown(KEY_V);
 }
+
+
+bool load_rom(CPU *c, const char *filename) {
+    FILE *f = fopen(filename, "rb");
+    if (!f) return false;
+
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    rewind(f);
+
+    if (size > (4096 - 0x200)) {
+        fclose(f);
+        return false;
+    }
+
+    fread(&c->memory[0x200], 1, (size_t)size, f);
+    fclose(f);
+
+    return true;
+}

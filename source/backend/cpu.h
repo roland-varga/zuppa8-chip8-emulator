@@ -1,6 +1,8 @@
 #pragma once
 
 #include <stdint.h>
+#include <string.h>
+#include <time.h>
 
 #define FONTSET_START_ADDRESS 0x50
 

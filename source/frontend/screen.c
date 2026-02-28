@@ -4,6 +4,7 @@ const double CPU_HZ = 700.0;
 
 void init_screen(CPU *c) {
     // TODO: Game name in title:
+    
     InitWindow(64 * 20, 32 * 20, "Zuppa-8 | ");
     SetTargetFPS(60);
     render(c);

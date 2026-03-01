@@ -8,9 +8,9 @@
  * CHIP-8 display output.
  */
 typedef enum {
-    RED_MODE,   /**< Render pixels using a red color theme */
-    GREEN_MODE, /**< Render pixels using a green color theme */
-    BLUE_MODE   /**< Render pixels using a blue color theme */
+    RED_MODE = 0xFF0000FF,   /**< Render pixels using a red color theme */
+    GREEN_MODE = 0x00FF00FF, /**< Render pixels using a green color theme */
+    BLUE_MODE = 0x0000FFFF   /**< Render pixels using a blue color theme */
 } ColorMode;
 
 /**
@@ -35,7 +35,7 @@ typedef struct {
  *
  * @param c Pointer to the CPU instance.
  */
-void init_screen(CPU *c);
+void init_screen(CPU *c, ColorMode color_mode);
 
 /**
  * @brief Renders the current frame.
@@ -47,4 +47,4 @@ void init_screen(CPU *c);
  *
  * @param c Pointer to the CPU instance.
  */
-void render(CPU *c);
+void render(CPU *c, ColorMode color_mode);

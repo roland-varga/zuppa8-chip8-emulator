@@ -2,22 +2,34 @@
 
 const double CPU_HZ = 700.0;
 
-void init_screen(CPU *c) {
+void init_screen(CPU *c, ColorMode color_mode) {
     // TODO: Game name in title:
     
     InitWindow(64 * 20, 32 * 20, "Zuppa-8 | ");
     SetTargetFPS(60);
-    render(c);
+    render(c, color_mode);
 }
 
-void render(CPU *c) {
+void render(CPU *c, ColorMode color_mode) {
     
     ScreenSettings settings = {0};
     settings.cpu_accum = 0;
     settings.timer_accum = 0;
 
     Color bg_color = GetColor(0xB3B4B6FF);
-    Color fg_color = GetColor(0x264BCCFF);
+    Color fg_color = {0};
+    
+    switch (color_mode) {
+    case RED_MODE:
+        fg_color = GetColor(RED_MODE);
+        break;
+    case GREEN_MODE:
+        fg_color = GetColor(GREEN_MODE);
+        break;
+    case BLUE_MODE:
+        fg_color = GetColor(BLUE_MODE);
+        break;
+    }
 
     while (!WindowShouldClose()) {
         double dt = GetFrameTime();
@@ -49,7 +61,6 @@ void render(CPU *c) {
                 }
             }
         }
-
         EndDrawing();
     }
 

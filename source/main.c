@@ -1,7 +1,6 @@
 #include "backend/emulator.h"
 #include "frontend/screen.h"
 
-// TODO: WARNINGS
 // TODO: README.md
 int main(int argc, char **argv) {
 
@@ -13,7 +12,6 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // TODO: better input handling, errors, parsing args, etc
     if (!load_rom(&cpu, argv[1])) {
         printf("\nROM NOT FOUND!\n");
         return 1;

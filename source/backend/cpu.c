@@ -1,6 +1,6 @@
 #include "cpu.h"
 #include "emulator.h"
-
+#include <stdlib.h>
 
 unsigned char chip8_fontset[80] = {
   0xF0, 0x90, 0x90, 0x90, 0xF0, // 0

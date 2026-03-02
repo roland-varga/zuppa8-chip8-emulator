@@ -1,13 +1,17 @@
 #include "backend/emulator.h"
 #include "frontend/screen.h"
-#include <string.h>
 
 // TODO: WARNINGS
-
+// TODO: README.md
 int main(int argc, char **argv) {
 
     CPU cpu = {0};
     init(&cpu);
+
+    if (argc < 2) {
+        printf("Usage: %s <rom> [-r|-g|-b]\n", argv[0]);
+        return 1;
+    }
 
     // TODO: better input handling, errors, parsing args, etc
     if (!load_rom(&cpu, argv[1])) {
@@ -23,7 +27,7 @@ int main(int argc, char **argv) {
         else if (strcmp(argv[2], "-b") == 0) color_mode = BLUE_MODE;
     }
     
-    init_screen(&cpu, color_mode);
+    init_screen(&cpu, argv[1], color_mode);
     
     return 0;
 }

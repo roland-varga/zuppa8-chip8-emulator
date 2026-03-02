@@ -1,50 +1,65 @@
 #pragma once
 #include "emulator.h"
+#include <string.h>
 
 /**
- * @brief Available display color modes.
+ * @brief Predefined foreground color modes for rendering.
  *
- * Defines preset color themes used when rendering the
- * CHIP-8 display output.
+ * Each value represents a 32-bit RGBA color encoded as
+ * 0xRRGGBBAA, compatible with raylib's GetColor().
+ *
+ * These values are used to determine the color of active
+ * pixels when drawing the CHIP-8 display buffer.
  */
 typedef enum {
-    RED_MODE = 0xFF0000FF,   /**< Render pixels using a red color theme */
-    GREEN_MODE = 0x00FF00FF, /**< Render pixels using a green color theme */
-    BLUE_MODE = 0x0000FFFF   /**< Render pixels using a blue color theme */
+    RED_MODE   = 0xFF0000FF, /**< Red foreground color */
+    GREEN_MODE = 0x00FF00FF, /**< Green foreground color */
+    BLUE_MODE  = 0x0000FFFF  /**< Blue foreground color */
 } ColorMode;
 
 /**
- * @brief Runtime timing configuration for the screen system.
+ * @brief Timing state used by the rendering loop.
  *
- * This structure stores time accumulators used to control
- * CPU cycle timing and delay/sound timer updates independently.
+ * Stores accumulated delta time values in order to:
+ * - Step the CPU at a fixed frequency.
+ * - Update delay and sound timers at 60 Hz.
+ *
+ * These accumulators allow decoupling emulation timing
+ * from the display frame rate.
  */
 typedef struct {
-    double cpu_accum;   /**< Accumulated time for CPU cycle stepping */
-    double timer_accum; /**< Accumulated time for 60Hz timer updates */
+    double cpu_accum;   /**< Accumulated time for CPU execution steps */
+    double timer_accum; /**< Accumulated time for 60 Hz timer updates */
 } ScreenSettings;
 
 /**
- * @brief Initializes the rendering system.
+ * @brief Initializes the graphical display system.
  *
- * Sets up the graphics window, rendering context, and any
- * visual configuration required to display the CHIP-8 output.
+ * Creates the application window, configures rendering
+ * parameters, and starts the main render loop.
  *
- * This function should be called once before entering the
- * main emulation loop.
+ * The window title is derived from the provided ROM name.
  *
- * @param c Pointer to the CPU instance.
+ * @param c           Pointer to the initialized CPU instance.
+ * @param game_name   Path or name of the loaded ROM.
+ * @param color_mode  Foreground color mode for rendering.
+ *
+ * @pre The CPU must be initialized and a ROM must be loaded.
  */
-void init_screen(CPU *c, ColorMode color_mode);
+void init_screen(CPU *c, const char* game_name, ColorMode color_mode);
 
 /**
- * @brief Renders the current frame.
+ * @brief Executes the main rendering and emulation loop.
  *
- * Draws the CHIP-8 display buffer to the screen using the
- * currently selected color mode. Also handles timing logic
- * for CPU stepping and timer updates if integrated with
- * the render loop.
+ * Continuously:
+ * - Processes input
+ * - Steps the CPU at the configured frequency
+ * - Updates timers at 60 Hz
+ * - Draws the display buffer to the window
  *
- * @param c Pointer to the CPU instance.
+ * The loop runs until the window is closed.
+ *
+ * @param c          Pointer to the CPU instance.
+ * @param color_mode Foreground color mode used for drawing.
  */
 void render(CPU *c, ColorMode color_mode);

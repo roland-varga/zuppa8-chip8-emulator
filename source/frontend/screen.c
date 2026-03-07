@@ -50,7 +50,7 @@ void render(CPU *c, ColorMode color_mode) {
     settings.cpu_accum = 0;
     settings.timer_accum = 0;
 
-    Color bg_color = GetColor(0xB3B4B6FF);
+    Color bg_color = GetColor(0x141414FF);
     Color fg_color = {0};
     
     switch (color_mode) {
@@ -86,7 +86,6 @@ void render(CPU *c, ColorMode color_mode) {
         BeginDrawing();
         ClearBackground(bg_color);
 
-        // TODO: do this with texture
         int scale = 20;
         for (int y = 0; y < 32; y++) {
             for (int x = 0; x < 64; x++) {

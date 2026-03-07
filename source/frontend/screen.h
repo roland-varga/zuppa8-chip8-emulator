@@ -12,9 +12,9 @@
  * pixels when drawing the CHIP-8 display buffer.
  */
 typedef enum {
-    RED_MODE   = 0xFF0000FF, /**< Red foreground color */
-    GREEN_MODE = 0x00FF00FF, /**< Green foreground color */
-    BLUE_MODE  = 0x0000FFFF  /**< Blue foreground color */
+    RED_MODE   = 0xE7363CFF, /**< Red foreground color */
+    GREEN_MODE = 0x59AC99FF, /**< Green foreground color */
+    BLUE_MODE  = 0x3E446EFF  /**< Blue foreground color */
 } ColorMode;
 
 /**

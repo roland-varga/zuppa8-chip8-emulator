@@ -2,6 +2,7 @@
 #include "frontend/screen.h"
 
 // TODO: README.md
+// TODO: icon
 int main(int argc, char **argv) {
 
     CPU cpu = {0};

@@ -249,8 +249,5 @@ void cycle(CPU *c) {
                 }
             }
         } break;
-
-        default:
-            break;
     }
 }
